@@ -1,0 +1,78 @@
+#include <iostream>
+#include <bits/stdc++.h>
+#include <chrono>
+#include <vector>
+using namespace std;
+using namespace std::chrono;
+int n;
+long long maxim;
+vector <long long> v;
+void generate_array(vector<long long>&v,long long maxim)
+{
+    mt19937_64 gen(time(NULL));
+    uniform_int_distribution<long long>random(0,maxim);
+    for(auto i=v.begin();i!=v.end();i++)
+    {
+        *i=random(gen);
+    }
+
+}
+void verificare(vector<long long> arr)
+{
+    int ok=1;
+    for (int i = 0; i < arr.size()-1; i++)
+        {
+            if(arr[i]>arr[i+1])
+                ok=0;
+        }
+    cout << ok;
+}
+void print(vector<long long> arr)
+{
+    for (int i = 0; i < arr.size(); i++)
+        cout << arr[i] << " ";
+    cout << endl;
+}
+void shellSort(vector<long long> &arr) {
+    
+    for (int gapSize = arr.size() / 2; gapSize > 0; gapSize /= 2) {
+        for (int currentIndex = gapSize; currentIndex < arr.size(); currentIndex++) {
+            // save the currentIndex
+            int currentIndexCopy = currentIndex;
+            // save the value of the currentIndex
+            int item = arr[currentIndex];
+
+            while (currentIndexCopy >= gapSize && arr[currentIndexCopy - gapSize] > item) {
+                arr[currentIndexCopy] = arr[currentIndexCopy - gapSize];
+                currentIndexCopy -= gapSize;
+            }
+
+            arr[currentIndexCopy] = item;
+        }
+    }
+}
+
+int main()
+{
+    cin>>n;
+    v=vector<long long>(n);
+    maxim=1000000;
+    generate_array(v,maxim);
+
+
+
+
+
+
+
+
+    auto start=high_resolution_clock::now();
+    shellSort(v);
+    auto stop=high_resolution_clock::now();
+    auto duration=duration_cast<microseconds>(stop-start);
+    cout<<duration.count()<<endl;
+    verificare(v);
+
+
+    return 0;
+}

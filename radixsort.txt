@@ -1,0 +1,82 @@
+#include <iostream>
+#include <bits/stdc++.h>
+#include <chrono>
+using namespace std;
+using namespace std::chrono;
+long long maxim;
+vector <long long> v(10000);
+void generate_array(vector<long long>&v,long long maxim)
+{
+    mt19937_64 gen(time(NULL));
+    uniform_int_distribution<long long>random(0,maxim);
+    for(auto i=v.begin();i!=v.end();i++)
+    {
+        *i=random(gen);
+    }
+
+}
+
+void verificare(vector<long long> arr)
+{
+    int ok=1;
+    for (int i = 0; i < arr.size()-1; i++)
+        {
+            if(arr[i]>arr[i+1])
+                {ok=0;
+                cout<<arr[i]<<" "<<arr[i+1]<<endl;}
+        }
+    cout << ok;
+}
+void radix_sort(vector<long long>& arr)
+{
+    int radix = 1;
+    // Largest element in unsorted array
+    int max = *(std::max_element(arr.begin(), arr.end()));
+    while(max / radix)
+    {
+        // Buckets used for sorting. Each bucket representing a digit.
+        std::vector<std::vector<int>> buckets(10, std::vector<int>());
+        for(const auto& num : arr)
+        {
+            int digit = num / radix % 10;
+            buckets[digit].push_back(num);
+        }
+        std::size_t k = 0;
+        // Take the elements out of buckets into the array
+        for(std::size_t i = 0; i < 10; i++)
+        {
+            for(std::size_t j = 0; j < buckets[i].size(); j++)
+            {
+                arr[k] = buckets[i][j];
+                k++;
+            }
+        }
+        // Change the place of digit used for sorting
+        radix *= 10;
+    }
+}
+void print(vector<long long> arr)
+{
+    for (int i = 0; i < arr.size(); i++)
+        cout << arr[i] << " ";
+    cout << endl;
+}
+
+int main()
+{
+    maxim=1000;
+    generate_array(v,maxim);
+
+
+
+
+
+    auto start=high_resolution_clock::now();
+    radix_sort(v);
+    auto stop=high_resolution_clock::now();
+    auto duration=duration_cast<microseconds>(stop-start);
+    cout<<duration.count()<<endl;
+    verificare(v);
+
+    return 0;
+}

@@ -1,0 +1,16 @@
+Cele 5 sortari folosite de mine sunt:Radix sort,Merge sort,Shell sort,
+Insertion sort,Heap sort.
+Pentru a compara eficienta sortarilor am implementat algoritmi si i-am
+testat pentru mai multe seturi de date diferite, cronometrarea este 
+facuta in microsecunde.
+Pentru n=1000 si maxim=1000000 radix sort,shell sort,insertion sort si
+heap sort au avut toate rezultatul 0 in timp ce merge sort a avut
+aproximativ 4021, rezultand a fi cea mai ineficienta pentru acest set
+de date.
+Pentru n=10000 si maxim=1000 cea mai rapida este heap sort(0), urmata
+de shell sort(~5996) , radixsort(~15624). merge sort(~51988) si in 
+final insertion sort(~369875).
+Pentru n=1000000 si maxim=1000000 cea mai rapida este radix sort
+(~1208203), urmata de heap sort(~1235025), shell sort(~1357226),
+merge sort(~5153057), cea mai lenta fiind insertion sort avand un timp
+foarte lung de sortare.
